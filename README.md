@@ -21,4 +21,4 @@ pip install -r requirements.txt
 python app.py
 ```
 Go to the locally-hosted website/create (i.e. http://127.0.0.1/create)
-Click to join the game
+  Click to join the game
