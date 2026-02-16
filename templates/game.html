@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <meta http-equiv="refresh" content="1">
+
+    <head>
+        <title>Tictactoe</title>
+    </head>
+
+    <h1>TicTacToe</h1>
+
+    {% if player_index is none and player_count < 2 %}
+    <form method="post" action="/join/{{ game_id }}">
+        <button type="submit">Join Game</button>
+    </form>
+    {% endif %}
+
+    <br>
+
+    {% for r in range(board|length) %}
+        {% for c in range(board[0]|length) %}
+            
+            <form method="post" action="/move/{{ game_id }}" style="display: inline; font-size: 20px;">
+                <input type="hidden" name="row" value="{{ r }}">
+                <input type="hidden" name="column" value="{{ c }}">
+                <button style="white-space: pre-wrap; width: 50px; height: 50px; font-size: 20px;" type="submit">{{board[r][c]}}</button>
+            </form>
+            
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+    {% if winner == 0 %}
+        <p>Player0 wins!</p>
+        <form method="post" action="/reset/{{ game_id }}">
+            <button type="submit">Reset</button>
+        </form>
+    {% elif winner == 1 %}
+        <p>Player1 wins!</p>
+        <form method="post" action="/reset/{{ game_id }}">
+            <button type="submit">Reset</button>
+        </form>
+    {% elif winner == -2 %}
+        <p>Cat's Game!</p>
+        <form method="post" action="/reset/{{ game_id }}">
+            <button type="submit">Reset</button>
+        </form>
+    {% else %}
+        <p>Player{{ turn }}'s turn</p>
+    {% endif %}
+</html>
