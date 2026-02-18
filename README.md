@@ -4,8 +4,8 @@ TicTacToe-Online is a simple online project created using Python and HTML, which
 
 ## Features
 - Online 2-player TicTacToe
-- Separate Game Rooms
-- Session-based verification of players
+- Separate game rooms with unique IDs
+- Secure session handling
 
 ## Installation
 
