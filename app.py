@@ -9,7 +9,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
-    SESSION_COOKIE_SECURE=False  # True when using HTTPS
+    SESSION_COOKIE_SECURE=False 
 )
 
 games = {}
