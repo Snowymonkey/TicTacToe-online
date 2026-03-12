@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, redirect, session, abort, url_for
 import secrets
 import threading
-import os
 import time
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = "" # CHANGE TO OWN SECRET KEY
 
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
@@ -98,17 +97,21 @@ def join(game_id):
 
     if game_id not in games:
         abort(404)
-    
-    if token in game[game_id]["players"]:
-        return redirect(url_for('game', game_id=game_id))
-    
+
     with games_lock:
         game = games[game_id]
+
+        token = session.get(f"player_{game_id}")
+        if token and token in game["players"]:
+            return redirect(url_for('game', game_id=game_id))
+
         if len(game["players"]) >= 2:
             return "Game is full :(", 400
+
         token = secrets.token_urlsafe(8)
         game["players"].append(token)
         session[f"player_{game_id}"] = token
+
     return redirect(url_for('game', game_id=game_id))
         
 
