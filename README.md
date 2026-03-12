@@ -17,9 +17,7 @@ pip install -r requirements.txt
 
 ```
 ## How to play
-Change app.secret_key to a unique string.
-This can be generated using secrets.token_hex(32)
-Now run the app.
+Change app.secret_key to a unique string generated using secrets.token_hex(32) to ensure safety.
 ```
 python app.py
 ```
